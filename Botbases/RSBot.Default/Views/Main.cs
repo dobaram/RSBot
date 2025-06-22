@@ -333,12 +333,16 @@ public partial class Main : DoubleBufferedControl
     }
 
     private void timerGrabByAbilityPet_Tick(object sender, EventArgs e)
-    {
-        if (Kernel.Bot.Running || !Game.Ready)
-            return;
-        if (Bundles.Loot.Config.UseAbilityPet && Game.Player.HasActiveAbilityPet && !PickupManager.RunningAbilityPetPickup)
-            PickupManager.RunAbilityPet(Game.Player.Position);
-    }
+{
+    if (Kernel.Bot == null || Game == null || Game.Player == null || Bundles.Loot?.Config == null || PickupManager == null)
+        return;
+
+    if (Kernel.Bot.Running || !Game.Ready)
+        return;
+
+    if (Bundles.Loot.Config.UseAbilityPet && Game.Player.HasActiveAbilityPet && !PickupManager.RunningAbilityPetPickup)
+        PickupManager.RunAbilityPet(Game.Player.Position);
+}
 
     /// <summary>
     /// </summary>
